@@ -37,10 +37,15 @@ A basic usage of django-cart could be (example):
 from cart import Cart
 from myproducts.models import Product
 
-def add_to_cart(request, product_id, quantity):
+def add_to_cart(request, product_id, notes, quantity):
     product = Product.objects.get(id=product_id)
     cart = Cart(request)
-    cart.add(product, product.unit_price, quantity)
+    cart.add(product, product.unit_price, notes, quantity)
+
+def update_cart(request, product_id, quantity, notes, unit_price):
+    product = Product.objects.get(id=product_id)
+    cart = Cart(request)
+    cart.update(product, quantity, notes, product.unit_price)
 
 def remove_from_cart(request, product_id):
     product = Product.objects.get(id=product_id)
@@ -75,7 +80,7 @@ def get_cart(request):
 
 ## Some Info
 
-This project was abandoned and I got it and added tests and South migrations, and I will be maintaining it from now on. 
+This project was abandoned and I got it and added tests and South migrations, and I will be maintaining it from now on.
 
 ## Known Problems
 
